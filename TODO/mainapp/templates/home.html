@@ -3,20 +3,38 @@
 {% block title %} Home Page {% endblock title %}
 
 {% block content %} 
-    <h1 style="text-align: center ;">TODO App</h1>
+    <h1 style="text-align: center ;">TODO APP</h1>
     <hr>
     <div style="text-align: center ;">
-        {% for todo in todos%}
-            <h2>{{todo.title}}</h2>
-            <p>{{todo.desc}}</p>
-            <small>{{todo.date_posted}}</small>
-            <a href="{% url 'edit' id=todo.id%}">Edit</a>
-            <a href="">Delete</a>
-            <hr>
+        {%if todos%}
+            {% for todo in todos%}
+                {%if todo.is_completed%}
+                    <del><h2>{{todo.title}}</h2></del>
+                    <del><p>{{todo.desc}}</p></del>
+                {%else%}
+                    <h2>{{todo.title}}</h2>
+                    <p>{{todo.desc}}</p>
+                {%endif%}   
+                <small>{{todo.date_posted}}</small>
+                <a href="{% url 'edit' id=todo.id%}">Edit</a>
+                <a href="{% url 'delete' id=todo.id%}">Delete</a>
+                {%if todo.is_completed%}
+                    <a href="{% url 'mark-as-complete' id=todo.id %}">Mark As Incomplete</a>
+                {%else%}
+                    <a href="{% url 'mark-as-complete' id=todo.id %}">Mark As Complete</a>
+                {%endif%}
 
-        {%endfor%}
+                
+                <hr>
+            {%endfor%}
+        {%else%}
+            <h3>NO TASK LEFT</h3>
+            <hr>
+        {%endif%}
+
+       
         <a href="{% url 'add' %}" class="btn btn-primary">Add</a>
-        <a href="" class="btn btn-danger">Delete All</a>
+        <a href="{% url 'delete-all' %}" class="btn btn-danger">Delete All</a>
         
     </div>
     
