@@ -8,3 +8,11 @@ def home(request):
     context = {'todos':todos}
 
     return render(request, 'home.html', context)
+
+def add(request):
+    return render(request, 'add.html')
+
+def edit(request, id):
+    todo = TODO.objects.get(id=id)
+    context = {'todo':todo}
+    return render(request, 'edit.html', context)
