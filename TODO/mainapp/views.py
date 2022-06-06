@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from mainapp.models import TODO
+from mainapp.forms import PersonForm
 # Create your views here.
 
 def home(request):
@@ -48,3 +49,18 @@ def mark_as_complete(request, id):
     todo.is_completed = not todo.is_completed
     todo.save()
     return redirect('home')
+
+def test(request):
+    if request.method == 'GET':
+        form = PersonForm()
+        return render(request, 'test.html', {'form':form})
+    else:
+        form = PersonForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+        else:
+            return render(request,'test.html', {'form':form})
+
+    
+    

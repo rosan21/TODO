@@ -8,5 +8,6 @@ urlpatterns = [
     path('edit/<int:id>', views.edit, name = 'edit'),
     path('delete/<int:id>', views.delete, name = 'delete'),
     path('delete-all/', views.delete_all, name = 'delete-all'),
-    path('mark-as-complete/<int:id>', views.mark_as_complete, name = 'mark-as-complete')
+    path('mark-as-complete/<int:id>', views.mark_as_complete, name = 'mark-as-complete'),
+    path('test/', views.test, name = 'test')
 ]

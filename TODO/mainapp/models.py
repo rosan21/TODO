@@ -9,3 +9,11 @@ class TODO(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Person(models.Model):
+    First_name = models.CharField(max_length=50)
+    Last_Name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.First_name
